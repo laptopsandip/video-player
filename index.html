@@ -1,43 +1,58 @@
-import { useState } from "react";
-
-const videos = [
-  { title: "Video 1", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-  { title: "Video 2", url: "https://www.youtube.com/embed/3JZ_D3ELwOQ" },
-  { title: "Video 3", url: "https://www.youtube.com/embed/LXb3EKWsInQ" },
-  { title: "Video 4", url: "https://www.youtube.com/embed/tgbNymZ7vqY" },
-  { title: "Video 5", url: "https://www.youtube.com/embed/ScMzIvxBSi4" }
-];
-
-export default function VideoHoverLinks() {
-  const [activeVideo, setActiveVideo] = useState(videos[0].url);
-
-  return (
-    <div className="flex h-screen p-4">
-      {/* Left Side Buttons */}
-      <div className="w-1/4 flex flex-col gap-2">
-        {videos.map((video, index) => (
-          <button
-            key={index}
-            onMouseOver={() => setActiveVideo(video.url)}
-            className="p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-          >
-            {video.title}
-          </button>
-        ))}
-      </div>
-      
-      {/* Right Side Video Display */}
-      <div className="w-3/4 flex justify-center items-center">
-        <iframe
-          width="560"
-          height="315"
-          src={activeVideo}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover Video Links</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+        .sidebar {
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .sidebar button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .sidebar button:hover {
+            background-color: #0056b3;
+        }
+        .video-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <button onmouseover="changeVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">Video 1</button>
+        <button onmouseover="changeVideo('https://www.youtube.com/embed/3JZ_D3ELwOQ')">Video 2</button>
+        <button onmouseover="changeVideo('https://www.youtube.com/embed/LXb3EKWsInQ')">Video 3</button>
+        <button onmouseover="changeVideo('https://www.youtube.com/embed/tgbNymZ7vqY')">Video 4</button>
+        <button onmouseover="changeVideo('https://www.youtube.com/embed/ScMzIvxBSi4')">Video 5</button>
     </div>
-  );
-}
+    <div class="video-container">
+        <iframe id="video-frame" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <script>
+        function changeVideo(url) {
+            document.getElementById('video-frame').src = url;
+        }
+    </script>
+</body>
+</html>
