@@ -1,0 +1,43 @@
+import { useState } from "react";
+
+const videos = [
+  { title: "Video 1", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+  { title: "Video 2", url: "https://www.youtube.com/embed/3JZ_D3ELwOQ" },
+  { title: "Video 3", url: "https://www.youtube.com/embed/LXb3EKWsInQ" },
+  { title: "Video 4", url: "https://www.youtube.com/embed/tgbNymZ7vqY" },
+  { title: "Video 5", url: "https://www.youtube.com/embed/ScMzIvxBSi4" }
+];
+
+export default function VideoHoverLinks() {
+  const [activeVideo, setActiveVideo] = useState(videos[0].url);
+
+  return (
+    <div className="flex h-screen p-4">
+      {/* Left Side Buttons */}
+      <div className="w-1/4 flex flex-col gap-2">
+        {videos.map((video, index) => (
+          <button
+            key={index}
+            onMouseOver={() => setActiveVideo(video.url)}
+            className="p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            {video.title}
+          </button>
+        ))}
+      </div>
+      
+      {/* Right Side Video Display */}
+      <div className="w-3/4 flex justify-center items-center">
+        <iframe
+          width="560"
+          height="315"
+          src={activeVideo}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
+    </div>
+  );
+}
